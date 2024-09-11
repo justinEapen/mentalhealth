@@ -1,5 +1,11 @@
+cohere
 altair
 numpy
 pandas
 pydeck
 streamlit
+PyPDF2
+python-docx
+matplotlib
+pillow
+fpdf2
