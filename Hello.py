@@ -20,29 +20,27 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
+        page_title="Govt of Punjab - Smart Competency Diagnostic and Candidate Profile Score Calculator",
+        page_icon="📊",
     )
 
-    st.write("# Welcome to 1 Streamlit! 👋")
+    st.write("# Welcome to Govt of Punjab - Smart Competency Diagnostic and Candidate Profile Score Calculator 📊")
 
     st.sidebar.success("Select a demo above.")
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
+        This website is a prototype developed for the **Smart India Hackathon**.
+        It is designed to assess candidate profiles and diagnose competency gaps.
+
         **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
+        of how it works!
+        
         ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+        - Check out [Smart India Hackathon](https://www.sih.gov.in/sih2024PS?technology_bucket=QWxs&category=U29mdHdhcmU=&organization=QWxs&organization_type=Mg==)
+
+        ### See the code behind it
+        - Github [Github](https://github.com/justinEapen/mentalhealth)
     """
     )
 
