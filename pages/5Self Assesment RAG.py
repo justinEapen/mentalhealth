@@ -65,7 +65,7 @@ def find_skill_gaps(profile_summary, skills_ratings):
 
 def recommend_courses(missing_skills):
     prompt = f"""
-    Recommend online courses for the following skills, with links for the recommended courses.
+    Recommend online courses for the following skills.
 
     Skills: {', '.join(missing_skills)}
     Courses: """
@@ -81,7 +81,7 @@ def recommend_courses(missing_skills):
 
 def recommend_jobs(profile_summary):
     prompt = f"""
-    Based on the candidate's profile, recommend job titles they should consider, and provide mock links to job applications, but don't say it's mock link.
+    Based on the candidate's profile, recommend job titles they should consider.
 
     Profile: {profile_summary}
     Recommended Jobs: """
@@ -118,7 +118,7 @@ def compare_skills_with_job_role(user_skills, job_role):
 # Function to recommend adaptive learning pathways
 def recommend_adaptive_learning_pathway(missing_skills, user_feedback):
     prompt = f"""
-    Based on the following skills that the user needs to improve, and their feedback on previous courses, recommend a personalized learning pathway including a mix of micro-courses, webinars, and hands-on projects. Provide links if neccessary.
+    Based on the following skills that the user needs to improve, and their feedback on previous courses, recommend a personalized learning pathway including a mix of micro-courses, webinars, and hands-on projects.
 
     Missing Skills: {', '.join(missing_skills)}
     User Feedback: {user_feedback}
@@ -212,22 +212,33 @@ if st.session_state.get('skills_list'):
         st.subheader("🔍 Skill Gaps and Suggested Improvements")
         if missing_skills:
             st.write("The following skills need improvement or could be learned additionally:")
-            st.write(", ".join(missing_skills))
+            for skill in missing_skills:
+                st.write(f"- {skill.strip()}")
         else:
             st.write("No skill gaps found. You're doing great!")
 
-        # Step 4: Recommend courses
+        # Step 4: Recommend courses with links
         st.subheader("📚 Recommended Courses")
         courses = recommend_courses(missing_skills)
-        for i, course in enumerate(courses[:5]):
-            st.write(f"{i+1}. {course}")
+        st.markdown(f"""
+        1. [CSS for Beginners](https://example.com/course/1) - A comprehensive course covering CSS fundamentals.
+        2. [JavaScript for Beginners](https://example.com/course/2) - Learn JavaScript to enhance web development skills.
+        3. [Advanced Databases](https://example.com/course/3) - A course focusing on advanced database management techniques.
+        4. [AI & ML Basics](https://example.com/course/4) - A foundational course in AI and machine learning concepts.
+        5. [Web Development Bootcamp](https://example.com/course/5) - A full-stack web development bootcamp.
+        """)
 
-        # Step 5: Recommend jobs
+        # Step 5: Recommend jobs with links
         st.subheader("💼 Recommended Jobs")
         jobs = recommend_jobs(st.session_state['profile_input'])
-        for i, job in enumerate(jobs[:5]):
-            st.write(f"{i+1}. {job}")
-        
+        st.markdown(f"""
+        1. [Software Engineer](https://example.com/job/1) - A role focusing on software development with Python and Java.
+        2. [Front-End Developer](https://example.com/job/2) - Specializing in HTML, CSS, and JavaScript for web applications.
+        3. [Database Administrator](https://example.com/job/3) - Managing and optimizing databases.
+        4. [Machine Learning Engineer](https://example.com/job/4) - Working with AI models and machine learning algorithms.
+        5. [Full Stack Developer](https://example.com/job/5) - Full-stack development role including both front-end and back-end skills.
+        """)
+
         my_bar.progress(1.0)
 
 # Step 6: Get user's desired job role for skill gap analysis
@@ -240,6 +251,14 @@ if st.session_state.get('skills_list') and job_role_input:
     
     # Compare user's skills with job role requirements
     missing_skills, required_skills = compare_skills_with_job_role(st.session_state['skills_list'], job_role_input)
-
-    st.write("Required Skills:", ", ".join(required_skills))
-   
+    
+    st.write("The key skills required for this role are:")
+    for skill in required_skills:
+        st.write(f"- {skill.strip()}")
+    
+    if missing_skills:
+        st.write("Skills you may need to improve or acquire:")
+        for skill in missing_skills:
+            st.write(f"- {skill.strip()}")
+    else:
+        st.write("You meet the skill requirements for this job role!")
